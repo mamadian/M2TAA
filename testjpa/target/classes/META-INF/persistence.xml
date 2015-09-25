@@ -4,7 +4,7 @@
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
 
-	 <persistence-unit name="dev" transaction-type="RESOURCE_LOCAL">
+	 <persistence-unit name="Product"RESOURCE_LOCAL">
      <!-- <class>org.hibernate.ejb.test.Cat</class> -->
      <!--  <class>org.hibernate.ejb.test.Distributor</class> -->
      <!--  <class>org.hibernate.ejb.test.Item</class> -->

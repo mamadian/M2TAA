@@ -7,7 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Task {
@@ -16,16 +18,18 @@ public class Task {
 
 	  private String name;
 	  
+	  @OneToOne
 	  private Status status;
 	  
+	  @OneToOne 
 	  private Priority priority;
 	  
-	  private List<Developper> developper = new ArrayList<Developper>();
+	  private Developper developper = new Developper();
 	  
 	  public Task(){
 		  super();
 	  }
-	  public Task(String name, Status status, Priority priority, List<Developper> developper) {
+	  public Task(String name, Status status, Priority priority, Developper developper) {
 			super();
 			this.name = name;
 			this.status = status;
@@ -60,11 +64,11 @@ public class Task {
 		this.priority = priority;
 	}
 	
-	@OneToMany(mappedBy = "task", cascade = CascadeType.PERSIST)
-	public List<Developper> getDevelopper() {
+	@ManyToOne
+	public Developper getDevelopper() {
 		return developper;
 	}
-	public void setDevelopper(List<Developper> developper) {
+	public void setDevelopper(Developper developper) {
 		this.developper = developper;
 	}
 	  

@@ -24,35 +24,36 @@ public class TestProduct {
         this.manager = manager;
     }
 	public static void main(String[] args) {
-		
-		EntityManagerFactory factory =   
-	              Persistence.createEntityManagerFactory("Product");
-	        EntityManager manager = factory.createEntityManager();
-	        TestProduct Product = new TestProduct(manager);
-
-	        EntityTransaction tx = manager.getTransaction();
-	        tx.begin();
-	        try {
-	        	Product.createTask();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	        tx.commit();
-
-	       // Product.listTask();
+	
+		 EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Product" );
+	      
+	      EntityManager entitymanager = emfactory.createEntityManager( );
+	      entitymanager.getTransaction( ).begin( );
+	      
+	        Priority P1 = new Priority( ); 
+	        P1.setId((long) 1);
+	        P1.setName("P1");
 	        
-	        manager.close();
-	        System.out.println(".. done");
+	        Status S1 = new Status();
+	        S1.setId((long) 1);
+	        S1.setName("S1");
+	        
+	        entitymanager.persist(P1);
+	        entitymanager.persist(S1);
+	        entitymanager.getTransaction( ).commit( );
+	        entitymanager.close( );
+	        emfactory.close( );
+	        
 	}
 	  
 	  private void createTask(){
-		  int numTask = manager.createQuery("SELECT * FROM Tast t",Task.class).getResultList().size();
+		  int numTask = manager.createQuery("SELECT t FROM Tast t",Task.class).getResultList().size();
 		  if(numTask==0){
 			  List<Developper> Developper = new ArrayList<Developper>();
 			  Priority P= new Priority("P1");
 			  Status S = new Status("S1");
 			  manager.persist(Developper);
-			  manager.persist(new Task("Jakab Gipsz",S,P,Developper));
+			  manager.persist(new Task());
 		  }
 	  }
 	
